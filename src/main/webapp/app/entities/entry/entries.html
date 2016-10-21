@@ -1,0 +1,40 @@
+<div>
+    <h2 data-translate="blogApp.entry.home.title">Entries</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="entry.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="blogApp.entry.home.createLabel">
+                        Create new Entry
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+        <div ng-repeat="entry in vm.entries track by entry.id">
+        <h2>{{entry.title}}</h2>
+        <small>Posted on {{entry.date | date: 'short'}} by {{entry.blog.user.login}}</small>
+        <div ng-bind-html="entry.content"></div>
+        <td class="text-right">
+            <div class="btn-group" style="margin-top: 10px">
+                <button type="submit"
+                        ui-sref="entry.edit({id:entry.id})"
+                        class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                </button>
+                <button type="submit"
+                        ui-sref="entry.delete({id:entry.id})"
+                        class="btn btn-danger btn-sm">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                    <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                </button>
+            </div>
+        </td>
+    </div>
+    </div>
+</div>
